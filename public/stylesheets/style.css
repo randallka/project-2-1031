@@ -18,3 +18,8 @@
 .collection-item form {
   margin-top: -5px;
 }
+
+.login img {
+  height: 30px;
+  object-fit: contain;
+}
