@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<h1><%= user.name %> 's Workouts</h1>
+<h3>Created</h3>
+<ul>
+<% workouts.forEach(workout => { %>
+    <li><a href="<%= workout._id %> "><%= workout.name %> </a></li>
+<% }) %>
+</ul>
+<h3>Liked</h3>
+<ul>
+
+</ul>
+<%- include('../partials/footer') %>

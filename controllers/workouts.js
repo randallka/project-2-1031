@@ -7,6 +7,7 @@ module.exports = {
     new: newWorkout,
     show,
     create,
+    showUser,
 };
 
 async function index(req, res) {
@@ -69,5 +70,16 @@ async function create(req, res) {
     } catch (err) {
         console.log(err)
         res.send('error')
+    }
+}
+
+async function showUser(req, res) { 
+    try { 
+        const createdDocs = await Workout.find({'creator' : { $in : req.user._id}}); 
+        console.log(createdDocs); 
+        res.render("workouts/user", {user : req.user, workouts : createdDocs});
+    } catch(err) { 
+        console.log(err) 
+        res.send("error")
     }
 }

@@ -8,4 +8,5 @@
      <li><%= exercise._id.name %>:   <%= exercise.count %> </li>
     <% }) %>
 </ul>
+<p>Created by: <%= user.name %> on <%= workout.createdAt.toLocaleDateString() %> </p>
 <%- include('../partials/footer') %>
