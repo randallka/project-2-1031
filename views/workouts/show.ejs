@@ -1,2 +1,11 @@
 <%- include('../partials/header') %>
+<h1><%= workout.name %> </h1>
+<h2><%= workout.description %> </h2>
+<h3>Difficulty: <%= workout.difficulty %> </h3>
+<h3>Exercises:</h3>
+<ul>
+    <% workout.exercises.forEach(exercise => { %>
+     <li><%= exercise._id.name %>:   <%= exercise.count %> </li>
+    <% }) %>
+</ul>
 <%- include('../partials/footer') %>

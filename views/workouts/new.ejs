@@ -1,2 +1,46 @@
 <%- include('../partials/header') %>
+
+<h1>Create a workout</h1>
+<form action="/workouts" method="POST">
+    <label>Workout Name:</label>
+    <input type="text" name="name">
+    <label>Description:</label>
+    <textarea name="description"></textarea>
+    <label>Difficulty</label>
+    <select name="difficulty">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <br>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              Add Exercises
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <ul>
+                <% exercises.forEach(exercise => { %>
+                    <li>
+                 <label><%= exercise.name %> </label>
+                 <input type="checkbox" name="exercise:<%= exercise.id %>">
+                 <label>Sets/Reps/Time</label>
+                 <input type="text" name="exercise:<%= exercise.id %>">
+                </li>
+                <% }) %>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    <h3>Can't find the right exercises? Create them using the link bellow</h3>
+    <a href="/exercises/new">New Exercise</a>
+    <br>
+    <input type="submit" value="Create Workout">
+  </form>
 <%- include('../partials/footer') %>

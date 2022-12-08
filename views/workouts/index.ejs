@@ -1,2 +1,11 @@
 <%- include('../partials/header') %>
+
+<h1>This is the index page </h1>
+<p>Login to create your own workouts</p>
+<h2>Workouts</h2>
+<ul>
+<% workouts.forEach(workout => { %>
+    <li><a href="workouts/<%= workout._id %> "><%= workout.name %> </a></li>
+<% }) %>
+</ul>
 <%- include('../partials/footer') %>

@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 
 const exerciseSchema = new Schema({
-    Name: String, 
-    Description: String,
+    name: String, 
+    description: String,
 });
 
 // movies collection (if you looked in mongdob, after you put something in it!)
