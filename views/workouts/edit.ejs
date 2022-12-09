@@ -1,61 +1,76 @@
 <%- include('../partials/header') %>
-<br>
-<div class="container-md">
-    <div class="container text-center">
-        <h1>Edit <%= workout.name %> </h1>
-    </div>
     <br>
-<form action="/workouts" method="POST">
-    <div class="accordion accordion-flush">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed fs-2 bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-              Exercises
-            </button>
-          </h2>
-          <div id="flush-collapseOne" class="accordion-collapse collapse">
-            <div class="accordion-body">
-                <ul>
-                <% exercises.forEach(exercise => { %>
-                    <li>
-                 <label><%= exercise.name %> </label>
-                 <input type="checkbox" name="exercise:<%= exercise.id %>">
-                 <input type="text" placeholder="Sets/Reps/Time" name="exercise:<%= exercise.id %>">
-                </li>
-                <% }) %>
-            </ul>
-            </div>
-          </div>
+    <div class="container-md">
+        <div class="container text-center">
+            <h1>Edit <%= workout.name %>
+            </h1>
         </div>
-      </div>
-      <br>
-      <div class="container-fluid">
-        <h3>Can't find the right exercises? Create one <a href="/exercises/new">here</a></h3>
-      </div>
-      <br>
-    <div class="mb-3">
-        <label class="form-label">Workout Name</label>
-        <input type="text" name="name" class="form-control"
-            value="<%= workout.name %> ">
+        <br>
+        <form action="/workouts/<%= workout.id %>?_mthod=PUT " method="POST">
+            <div class="accordion accordion-flush">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fs-2 bg-light" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Exercises
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <ul>
+                                <% exercises.forEach(exercise=> { %>
+                                    <li>
+                                        <label>
+                                            <%= exercise.name %>
+                                        </label>
+                                        <input type="checkbox" name="exercise:<%= exercise.id %>" 
+                                            <% workout.exercises.forEach(obj=> { %>
+                                                <% if (exercise.id===obj._id.id) { %>
+                                                    checked
+                                                <% } %>
+                                            <% }) %>>
+                                        <input type="text" placeholder="Sets/Reps/Time" name="exercise:<%= exercise.id %>" 
+                                            <% workout.exercises.forEach(obj=> { %>
+                                                <% if (exercise.id===obj._id.id) { %>
+                                                    value="<%= obj.count %> "
+                                                <% } %>
+                                            <% }) %>>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container-fluid">
+                <h3>Can't find the right exercises? Create one <a href="/exercises/new">here</a></h3>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label class="form-label">Workout Name</label>
+                <input type="text" name="name" class="form-control" value="<%= workout.name %> ">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="3"><%= workout.description %></textarea>
+            </div>
+            <div>
+                <label class="form-label">Difficulty</label>
+                <select name="difficulty" class="form-select" value="<%= workout.difficulty %> ">
+                    <option value="<%= workout.difficulty %> ">
+                        <%= workout.difficulty %>
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <br>
+            <br>
+            <input type="submit" value="Edit Workout">
+        </form>
     </div>
-    <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea name="description" class="form-control" rows="3"><%= workout.description %></textarea>
-    </div>
-    <div>
-        <label class="form-label">Difficulty</label>
-        <select name="difficulty" class="form-select" value="<%= workout.difficulty %> ">
-            <option value="<%= workout.difficulty %> "><%= workout.difficulty %> </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-    </div>
-    <br>
-    <br>
-    <input type="submit" value="Create Workout">
-  </form>
-</div>
-<%- include('../partials/footer') %>
+    <%- include('../partials/footer') %>

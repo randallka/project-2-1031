@@ -9,6 +9,7 @@ module.exports = {
     create,
     showUser,
     edit,
+    update,
 };
 
 async function index(req, res) {
@@ -67,7 +68,7 @@ async function create(req, res) {
         };
         const workoutDoc = await Workout.create(req.body);
         console.log(workoutDoc);
-        res.render('workouts/index')
+        res.redirect('workouts/index')
     } catch (err) {
         console.log(err)
         res.send('error')
@@ -86,7 +87,16 @@ async function showUser(req, res) {
 }
 
 async function edit(req, res) { 
-    const workoutDoc = await Workout.findById(req.params.id); 
+    const workoutDoc = await Workout.findById(req.params.id)
+        .populate({
+        path: 'exercises._id',
+        model: 'Exercise'
+   }); 
     const exerciseDocs = await Exercise.find({});
+    console.log(workoutDoc);
+    console.log(exerciseDocs);
     res.render('workouts/edit', {workout : workoutDoc, exercises: exerciseDocs});
+}; 
+async function update(req, res) { 
+    res.redirect(`/workouts/${req.params.id}`)
 }

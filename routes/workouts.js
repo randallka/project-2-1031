@@ -7,4 +7,5 @@ router.get('/myWorkouts', workoutCtrl.showUser);
 router.get('/:id/edit', workoutCtrl.edit);
 router.get('/:id', workoutCtrl.show);
 router.post('/', workoutCtrl.create);
+router.put('/:id', workoutCtrl.update);
 module.exports = router;
