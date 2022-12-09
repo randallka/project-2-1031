@@ -8,7 +8,9 @@
        <div class="p-3 border bg-light">Created</div>
        <ul class="list-unstyled">
         <% workouts.forEach(workout => { %>
-            <li><a href="<%= workout._id %> "><%= workout.name %> </a> <%= workout.createdAt.toLocaleDateString() %> </li>
+            <li><a href="<%= workout._id %> "><%= workout.name %> </a><%= workout.createdAt.toLocaleDateString() %> 
+            <a class="btn btn-outline-primary btn-sm" href="/workouts/<%= workout._id %>/edit" role="button">Edit</a>
+            </li>
         <% }) %>
         </ul>
       </div>

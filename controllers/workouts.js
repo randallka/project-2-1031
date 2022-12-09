@@ -8,6 +8,7 @@ module.exports = {
     show,
     create,
     showUser,
+    edit,
 };
 
 async function index(req, res) {
@@ -82,4 +83,10 @@ async function showUser(req, res) {
         console.log(err) 
         res.send("error")
     }
+}
+
+async function edit(req, res) { 
+    const workoutDoc = await Workout.findById(req.params.id); 
+    const exerciseDocs = await Exercise.find({});
+    res.render('workouts/edit', {workout : workoutDoc, exercises: exerciseDocs});
 }

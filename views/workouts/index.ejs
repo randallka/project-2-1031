@@ -9,9 +9,9 @@
     <ul class="list-group">
         <% workouts.forEach(workout => { %>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <%= workout.name %> <span class="text-end"><%= workout.createdAt.toLocaleDateString() %> </span>
+                <a class="btn btn-outline-primary" href="workouts/<%= workout.id %> " role="button"><%= workout.name %> </a><span class="text-end"><%= workout.createdAt.toLocaleDateString() %> </span>
                 <span class="badge bg-primary rounded-pill"><%= workout.difficulty %> </span>
-              </li>
+                </li>
         <% }) %>
       </ul>
 </div>
