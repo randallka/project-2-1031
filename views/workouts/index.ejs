@@ -1,11 +1,19 @@
 <%- include('../partials/header') %>
-
-<h1>This is the index page </h1>
-<p>Login to create your own workouts</p>
-<h2>Workouts</h2>
+<div class="container text-center">
+    <h1>All Workouts </h1>
+    <% if (!user) { %>
+        <p>Login to create your own workouts</p>
+    <% } %>
+</div>
+<div class="container">
+    <ul class="list-group">
+        <% workouts.forEach(workout => { %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= workout.name %> <span class="text-end"><%= workout.createdAt.toLocaleDateString() %> </span>
+                <span class="badge bg-primary rounded-pill"><%= workout.difficulty %> </span>
+              </li>
+        <% }) %>
+      </ul>
+</div>
 <ul>
-<% workouts.forEach(workout => { %>
-    <li><a href="workouts/<%= workout._id %> "><%= workout.name %> </a></li>
-<% }) %>
-</ul>
 <%- include('../partials/footer') %>
