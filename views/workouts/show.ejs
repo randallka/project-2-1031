@@ -1,12 +1,18 @@
 <%- include('../partials/header') %>
-<h1><%= workout.name %> </h1>
-<h2><%= workout.description %> </h2>
-<h3>Difficulty: <%= workout.difficulty %> </h3>
-<h3>Exercises:</h3>
-<ul>
-    <% workout.exercises.forEach(exercise => { %>
-     <li><%= exercise._id.name %>:   <%= exercise.count %> </li>
-    <% }) %>
-</ul>
-<p>Created by: <%= user.name %> on <%= workout.createdAt.toLocaleDateString() %> </p>
+<div class="container-sm">
+    <h1><%= workout.name %> </h1>
+</div>
+<div class="container-sm"> 
+    <p class="text-muted fs-4"><%= workout.description %> </p>
+    <p class="fs-3">Difficulty: <%= workout.difficulty %> </p>
+    <p class="fs-3">Exercises:</p>
+    <ul>
+        <% workout.exercises.forEach(exercise => { %>
+         <li><span class="fw-semibold"><%= exercise._id.name %>:</span> <%= exercise.count %> </li>
+        <% }) %>
+    </ul>
+    <br>
+    <br>
+    <p class="fs-8 text-muted">Created by: <%= user.name %> on <%= workout.createdAt.toLocaleDateString() %> </p>
+</div>
 <%- include('../partials/footer') %>
