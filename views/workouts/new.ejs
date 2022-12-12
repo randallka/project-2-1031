@@ -15,14 +15,15 @@
           </h2>
           <div id="flush-collapseOne" class="accordion-collapse collapse">
             <div class="accordion-body">
-                <ul>
-                <% exercises.forEach(exercise => { %>
-                    <li>
-                 <label><%= exercise.name %> </label>
-                 <input type="checkbox" name="exercise:<%= exercise.id %>">
-                 <input type="text" placeholder="Sets/Reps/Time" name="exercise:<%= exercise.id %>">
-                </li>
-                <% }) %>
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for exercises..">
+                <ul id="myUL">
+                    <% exercises.forEach(exercise => { %>
+                    <li><label><%= exercise.name %></label>
+                        <input type="checkbox" name="exercise:<%= exercise.id %>">
+                        <input type="text" placeholder="Sets/Reps/Time" name="exercise:<%= exercise.id %>">
+                    </li>
+                    <% }) %>
+                  </ul>
             </ul>
             </div>
           </div>
@@ -57,4 +58,22 @@
     <input type="submit" value="Create Workout">
   </form>
 </div>
+<script>
+    function myFunction() {
+      var input, filter, ul, li, label, i, txtValue;
+      input = document.getElementById('myInput');
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName('li');
+      for (i = 0; i < li.length; i++) {
+        label = li[i].getElementsByTagName("label")[0];
+        txtValue = label.textContent || label.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+    </script>
 <%- include('../partials/footer') %>
