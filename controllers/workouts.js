@@ -11,6 +11,7 @@ module.exports = {
     edit,
     update,
     delete: deleteWorkout,
+    like,
 };
 
 async function index(req, res) {
@@ -42,7 +43,7 @@ async function show(req, res) {
             model: 'Exercise'
        })
        const userDoc = await user.findById(workoutDoc.creator); 
-        res.render('workouts/show', {workout : workoutDoc, user : userDoc});
+        res.render('workouts/show', {workout : workoutDoc, creator : userDoc});
     } catch (err) {
         console.log(err);
         res.send("error")
@@ -64,20 +65,21 @@ async function create(req, res) {
             }
         };
         const workoutDoc = await Workout.create(req.body);
-        res.redirect('workouts/index')
+        res.redirect('/workouts');
     } catch (err) {
-        console.log(err)
-        res.send('error')
+        console.log(err);
+        res.send('error');
     }
 }
 
 async function showUser(req, res) { 
     try { 
         const createdDocs = await Workout.find({'creator' : { $in : req.user._id}});  
-        res.render("workouts/user", {user : req.user, workouts : createdDocs});
+        const likedDocs = await Workout.find({'likes' : {$in : req.user._id}});
+        res.render("workouts/user", {user : req.user, workouts : createdDocs, liked : likedDocs});
     } catch(err) { 
-        console.log(err) 
-        res.send("error")
+        console.log(err); 
+        res.send("error");
     }
 }
 
@@ -106,7 +108,6 @@ async function update(req, res) {
                     exerciseObj._id = key.split(":")[1];
                     exerciseObj.count = req.body[key][1];
                     req.body.exercises.push(exerciseObj);
-                    console.log(exerciseObj)
                 }
             }
         };
@@ -115,7 +116,7 @@ async function update(req, res) {
         workoutDoc.difficulty = req.body.difficulty; 
         workoutDoc.exercises = req.body.exercises;
         workoutDoc.save();
-        res.redirect(`/workouts/${req.params.id}`)
+        res.redirect(`/workouts/${req.params.id}`);
     } catch (err) {
         console.log(err);
         res.send('error');
@@ -131,4 +132,17 @@ async function deleteWorkout(req, res) {
         console.log(err); 
         res.send("error");
     }
-}
+}; 
+
+async function like(req, res) { 
+    const workoutDoc = await Workout.findById(req.params.id); 
+    const currentUser = await user.findById(req.user._id);
+    if (workoutDoc.likes.includes(currentUser._id)) { 
+        const index =  workoutDoc.likes.indexOf(currentUser._id); 
+        workoutDoc.likes.splice(index, 1);
+    } else { 
+        workoutDoc.likes.push(currentUser._id);
+    }
+    workoutDoc.save();
+    res.redirect(`/workouts/${req.params.id}`);
+};

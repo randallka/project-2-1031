@@ -15,8 +15,13 @@
         </ul>
       </div>
       <div class="col">
-        <div class="p-3 border bg-light">Liked
-        </div>
+        <div class="p-3 border bg-light">Liked</div>
+        <ul class="list-unstyled">
+            <% liked.forEach(workout => { %>
+                <li><a href="<%= workout._id %> "><%= workout.name %> </a> 
+                </li>
+            <% }) %>
+            </ul>
       </div>
     </div>
   </div>

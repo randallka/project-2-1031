@@ -6,13 +6,33 @@
     <p class="text-muted fs-4"><%= workout.description %> </p>
     <p class="fs-3">Difficulty: <%= workout.difficulty %> </p>
     <p class="fs-3">Exercises:</p>
-    <ul>
+    <ul call="list-unstyled">
         <% workout.exercises.forEach(exercise => { %>
-         <li><span class="fw-semibold"><%= exercise._id.name %>:</span> <%= exercise.count %> </li>
+            <p>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#<%= exercise._id.name.replace(/\s+/g,'') %>" aria-expanded="false" aria-controls="<%= exercise._id.name.replace(/\s+/g,'') %>">
+                    <%= exercise._id.name %> 
+                </button> <%= exercise.count %> 
+              </p>
+              <div class="collapse" id="<%= exercise._id.name.replace(/\s+/g,'') %>">
+                <div class="card card-body">
+                  <%= exercise._id.description %> 
+                </div>
+              </div>
         <% }) %>
     </ul>
-    <br>
-    <br>
-    <p class="fs-8 text-muted">Created by: <%= user.name %> on <%= workout.createdAt.toLocaleDateString() %> </p>
+    <% if (user) { %>
+        <% if (user._id != creator.id) { %>
+            <form action="/workouts/<%= workout.id %>/like" method="POST">
+                <button class="btn fs-5" type="submit"> 
+                    <% if (workout.likes.includes(user._id)) { %>
+                        <i class="fa-solid fa-heart liked"></i> 
+                    <% } else { %>
+                        <i class="fa-regular fa-heart"></i>
+                    <% } %>    
+                </button>
+            </form>
+        <% } %>
+    <% } %>
+    <p class="fs-8 text-muted">Created by: <%= creator.name %> on <%= workout.createdAt.toLocaleDateString() %> </p>
 </div>
 <%- include('../partials/footer') %>
