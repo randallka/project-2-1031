@@ -43,8 +43,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-:mushroom:
-1
 
 
 
