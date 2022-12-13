@@ -20,7 +20,7 @@ View workout
 * EJS
 * CSS
 * Javascript
-* MongoDB
+* Mongoose
 * Express
 
 ## Getting Started: 
@@ -30,3 +30,4 @@ View workout
 ## Icebox (future improvements)
 * Add the ability to sort lists (date created, difficulty, etc.)
 * Add depth to workouts and exercises (equipment, time, muscle groups, etc.)
+* improved styling
