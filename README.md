@@ -16,6 +16,8 @@ Create workout
 View workout
 ![View page](screenshots/workout-view.png)
 
+## ERD diagram 
+![ERD](screenshots/erd.png)
 ## Technologies Used: 
 * EJS
 * CSS
