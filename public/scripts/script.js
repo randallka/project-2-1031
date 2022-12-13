@@ -1,8 +1,8 @@
 function myFunction() {
-    var input, filter, ul, li, label, i, txtValue;
+    let input, filter, ul, li, label, i, txtValue;
     input = document.getElementById('myInput');
     filter = input.value.toUpperCase();
-    ul = document.getElementById("sortList");
+    ul = document.getElementById("sortlist");
     li = ul.getElementsByTagName('li');
     for (i = 0; i < li.length; i++) {
       label = li[i].getElementsByTagName("label")[0];
@@ -16,29 +16,22 @@ function myFunction() {
   }
 
   function slist (target) {
-// (A) SET CSS + GET ALL LIST ITEMS
+//SET CSS + GET ALL LIST ITEMS
 target.classList.add("slist");
 let items = target.getElementsByTagName("li"), current = null;
 
 // (B) MAKE ITEMS DRAGGABLE + SORTABLE
 for (let i of items) {
-  // (B1) ATTACH DRAGGABLE
   i.draggable = true;
-  
-  // (B2) DRAG START - YELLOW HIGHLIGHT DROPZONES
   i.ondragstart = (ev) => {
     current = i;
     for (let it of items) {
       if (it != current) { it.classList.add("hint"); }
     }
   };
-  
-  // (B3) DRAG ENTER - RED HIGHLIGHT DROPZONE
   i.ondragenter = (ev) => {
     if (i != current) { i.classList.add("active"); }
   };
-
-  // (B4) DRAG LEAVE - REMOVE RED HIGHLIGHT
   i.ondragleave = () => {
     i.classList.remove("active");
   };

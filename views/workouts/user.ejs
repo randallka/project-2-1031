@@ -1,24 +1,31 @@
 <%- include('../partials/header') %>
-<div class="container text-center">
-    <h1><%= user.name %> 's Workouts</h1>
+<div class="container text-center p-4">
+    <h1 class="fw-bolder"><%= user.name %> 's Workouts</h1>
 </div>
 <div class="container px-4 text-center">
     <div class="row gx-5">
       <div class="col">
-       <div class="p-3 border bg-light">Created</div>
-       <ul class="list-unstyled">
+       <div class="p-3 border bg-light"><span class="fs-4 fw-bolder">Created</span></div>
+       <ul class="list-unstyled list-group">
         <% workouts.forEach(workout => { %>
-            <li><a href="<%= workout._id %> "><%= workout.name %> </a><%= workout.createdAt.toLocaleDateString() %> 
-            <a class="btn btn-outline-primary btn-sm" href="/workouts/<%= workout._id %>/edit" role="button">Edit</a>
+            <li class="list-group-item justify-content-between d-flex">
+                <a class="btn btn-outline-primary col-sm-4 col-md-6" href="<%= workout._id %> "><%= workout.name %> </a>
+                <span class="text-muted px-2"><%= workout.createdAt.toLocaleDateString() %></span> 
+            <a class="btn btn-outline-primary btn-sm px-2" href="/workouts/<%= workout._id %>/edit" role="button">Edit</a>
             </li>
         <% }) %>
+        <% if (workouts.length === 0) { %>
+            <li class="list-group-item">
+                <a class="btn btn-outline-primary col-8" href="/workouts/new" >Create your first workout</a>
+            </li> 
+        <% } %>
         </ul>
       </div>
       <div class="col">
-        <div class="p-3 border bg-light">Liked</div>
-        <ul class="list-unstyled">
+        <div class="p-3 border bg-light"><span class="fs-4 fw-bolder">Liked</span></div>
+        <ul class="list-unstyled list-group">
             <% liked.forEach(workout => { %>
-                <li><a href="<%= workout._id %> "><%= workout.name %> </a> 
+                <li class="list-group-item"><a class="btn btn-outline-primary col-8" href="<%= workout._id %> "><%= workout.name %> </a> 
                 </li>
             <% }) %>
             </ul>
