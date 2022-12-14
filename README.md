@@ -26,10 +26,11 @@ View workout
 * Express
 
 ## Getting Started: 
-#### Visit the app here: 
+#### Use the app here: https://shiny-ray-apron.cyclic.app/
 #### Project planning trello: https://trello.com/b/19kain49/project-2
 
 ## Icebox (future improvements)
 * Add the ability to sort lists (date created, difficulty, etc.)
+* Add more search functionalities- search by user/exercise
 * Add depth to workouts and exercises (equipment, time, muscle groups, etc.)
-* improved styling
+* improved styling- app is a little bland at the moment 
