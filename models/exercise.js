@@ -7,5 +7,4 @@ const exerciseSchema = new Schema({
     description: String,
 });
 
-// movies collection (if you looked in mongdob, after you put something in it!)
 module.exports = mongoose.model("Exercise", exerciseSchema);

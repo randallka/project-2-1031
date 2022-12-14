@@ -21,5 +21,4 @@ const workoutSchema = new Schema(
     timestamps: true,
   });
   
-  // movies collection (if you looked in mongdob, after you put something in it!)
   module.exports = mongoose.model("Workout", workoutSchema);
