@@ -22,8 +22,7 @@ View workout
 * EJS
 * CSS
 * Javascript
-* Mongoose
-* Express
+* Mongoose/MongoDB
 
 ## Getting Started: 
 #### Use the app here: https://shiny-ray-apron.cyclic.app/
